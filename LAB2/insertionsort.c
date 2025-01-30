@@ -32,6 +32,14 @@ void insertionsort2(int arr[],int n){
         arr[j+1]=key;
     }
 }
+int check(int a[],int n,int num){
+    for(int i=0;i<n;i++){
+        if(a[i]==num){
+            return 1;
+        }
+    }
+    return 0;
+}
 int main(){
     int n;
     printf("Enter the no. of elements: ");
@@ -40,9 +48,19 @@ int main(){
     srand(time(0));
     printf("Enter the min and max value of the array: ");
     int min,max;
+    int num;
     scanf("%d %d",&min,&max);
     for(int i=0;i<n;i++){
-        arr[i]=min+rand()%(max-min)+1;
+        if(i==0){
+            arr[i]=rand()%(max-min+1)+min;
+        }
+        else{
+            num=rand()%(max-min+1)+min;
+            while(check(arr,n,num)){
+                num=min+rand()%(max-min)+1;
+            }
+            arr[i]=num;
+        }
     }
     printf("The original Array:");
     printarr(arr,n);
